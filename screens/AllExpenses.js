@@ -1,10 +1,7 @@
-import { Text } from "react-native"
-
+import ExpensesOutput from "../components/ExpensesOutput/ExpensesOutput"
 
 const AllExpenses = (params) => {
-    return (
-        <Text>All Expense Screen</Text>
-    )
+    return <ExpensesOutput expensesPeriod={"Last 7 Days"}/>
 }
 
 export default AllExpenses
