@@ -1,7 +1,7 @@
 import ExpensesOutput from "../components/ExpensesOutput/ExpensesOutput"
 
 const AllExpenses = (params) => {
-    return <ExpensesOutput expensesPeriod={"Last 7 Days"}/>
+    return <ExpensesOutput expensesPeriod={"Total"}/>
 }
 
 export default AllExpenses
