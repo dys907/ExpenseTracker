@@ -8,20 +8,27 @@ import AllExpenses from "./screens/AllExpenses";
 import ManageExpenses from "./screens/ManageExpense";
 import RecentExpenses from "./screens/RecentExpenses";
 import { GlobalStyles } from "./constants/styles";
-import IconButton from "./components/UI/Icon/IconButton";
+import IconButton from "./components/UI/IconButton";
+import ExpensesContextProvider from "./store/expenses-context";
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 const ExpensesOverview = () => {
   return (
-    <BottomTabs.Navigator screenOptions={{
+    <BottomTabs.Navigator screenOptions={({navigation})=>({
       headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
       headerTintColor: 'white',
       tabBarStyle:{backgroundColor:GlobalStyles.colors.primary500},
       tabBarActiveTintColor: GlobalStyles.colors.accent500,
-      headerRight: ({tintColor})=> <IconButton icon={"add"} color={tintColor} size={24} onPress={() => {}}/>
-    }}>
+      headerRight: ({tintColor})=> (
+      <IconButton icon={"add"} 
+      color={tintColor} 
+      size={24} 
+      onPress={() => {
+        navigation.navigate('ManageExpense')
+      }}/>
+  )})}>
       <BottomTabs.Screen 
         name="RecentExpenses" 
         component={RecentExpenses} 
@@ -46,16 +53,25 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
+      <ExpensesContextProvider>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{
+          headerStyle: {backgroundColor: GlobalStyles.colors.primary500},
+          headerTintColor:'white'
+        }}>
           <Stack.Screen
             name="ExpensesOverview"
             component={ExpensesOverview}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="ManageExpense" component={ManageExpenses} />
+          <Stack.Screen 
+          name="ManageExpense" 
+          component={ManageExpenses} 
+          options={{presentation: 'modal'}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
+      </ExpensesContextProvider>
     </>
   );
 }
