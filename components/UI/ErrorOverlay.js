@@ -4,7 +4,7 @@ import { GlobalStyles } from "../../constants/styles"
 
 
 const ErrorOverlay = ({message,onConfirm}) => {
-    <View>
+    return <View style={styles.container}>
         <Text style={[styles.text,styles.title]}>An error occured!</Text>
         <Text style={styles.text}>{message}</Text>
         <Button onpress={onConfirm}>Okay</Button>
@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
     },
     text: {
         textAlign: 'center',
-        marginBottom: 8
+        marginBottom: 8,
+        color: 'white'
     },
     title: {
         fontSize: 20,
